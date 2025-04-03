@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/demo/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/demo/tsconfig.app.json"
+  },
+  "projects": {
+    "demo": {
+      "type": "application",
+      "root": "apps/demo",
+      "entryFile": "main",
+      "sourceRoot": "apps/demo/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/demo/tsconfig.app.json"
+      }
+    },
+    "slack-assistant": {
+      "type": "library",
+      "root": "libs/slack-assistant",
+      "entryFile": "index",
+      "sourceRoot": "libs/slack-assistant/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/slack-assistant/tsconfig.lib.json"
+      }
+    }
+  },
+  "monorepo": true,
+  "root": "apps/demo"
+}

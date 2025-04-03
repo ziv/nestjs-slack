@@ -1,0 +1,17 @@
+{
+  "name": "@xpr/slack-assistant",
+  "version": "0.0.1",
+  "description": "NestJS server implementation of the Slack Assistant",
+  "author": "Ziv Perry",
+  "private": false,
+  "license": "MIT",
+  "peerDependencies": {
+    "@nestjs/common": "^11.0.1",
+    "@nestjs/core": "^11.0.1",
+    "@nestjs/microservices": "^11.0.13",
+    "@nestjs/platform-express": "^11.0.1",
+    "@slack/bolt": "^4.2.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  }
+}
