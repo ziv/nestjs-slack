@@ -1,4 +1,4 @@
-name: release @xpr/devcache
+name: release nestjs-slack-assistant
 
 on:
   workflow_dispatch:
@@ -28,7 +28,7 @@ jobs:
       - name: 🔑dependencies
         run: npm ci
       - name: 🍓verify
-        run: npm audit signatures -w packages/nodejs-client
+        run: npm audit signatures
       - name: 🌈build
         run: npm run build-lib
       - name: 🦋release
