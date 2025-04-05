@@ -10,6 +10,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "strict": true,
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
@@ -18,10 +19,10 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@xpr/slack-assistant": [
+      "@xpr/nestjs-slack-assistant": [
         "libs/slack-assistant/src"
       ],
-      "@xpr/slack-assistant/*": [
+      "@xpr/nestjs-slack-assistant/*": [
         "libs/slack-assistant/src/*"
       ]
     }

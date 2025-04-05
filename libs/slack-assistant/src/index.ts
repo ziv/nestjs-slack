@@ -1,4 +1,5 @@
-import SlackAssistant from '@xpr/slack-assistant/slack-assistant';
+import SlackAssistant from './slack-assistant';
 
 export * from './decorators';
+export * from './types';
 export { SlackAssistant };

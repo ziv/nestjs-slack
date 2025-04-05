@@ -30,6 +30,9 @@
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
+    "@semantic-release/exec": "^6.0.3",
+    "@tsconfig/node18": "^18.2.4",
+    "semantic-release": "^24.2.1",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
     "@nestjs/cli": "^11.0.0",
@@ -56,6 +59,20 @@
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0"
   },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": true,
+          "pkgRoot": "dist/libs/slack-assistant"
+        }
+      ],
+      "@semantic-release/github"
+    ]
+  },
   "jest": {
     "moduleFileExtensions": [
       "js",
@@ -77,6 +94,7 @@
       "<rootDir>/apps/"
     ],
     "moduleNameMapper": {
+      "^@app/xxx(|/.*)$": "<rootDir>/libs/xxx/src/$1",
       "^@xpr/slack-assistant(|/.*)$": "<rootDir>/libs/slack-assistant/src/$1"
     }
   }
