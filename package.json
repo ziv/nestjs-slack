@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "author": "",
-  "private": true,
+  "private": false,
   "license": "UNLICENSED",
   "scripts": {
     "build-lib": "tsc -p libs/slack-assistant/tsconfig.lib.json",
