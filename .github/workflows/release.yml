@@ -31,6 +31,8 @@ jobs:
         run: npm audit signatures
       - name: 🌈build
         run: npm run build-lib
+      - name: 👀 add required files
+        run: cp libs/slack-assistant/package.json dist/libs/slack-assistant/. && cp libs/slack-assistant/readme.md dist/libs/slack-assistant/.
       - name: 🦋release
         run: npx semantic-release
         env:
