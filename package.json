@@ -94,8 +94,7 @@
       "<rootDir>/apps/"
     ],
     "moduleNameMapper": {
-      "^@app/xxx(|/.*)$": "<rootDir>/libs/xxx/src/$1",
-      "^@xpr/slack-assistant(|/.*)$": "<rootDir>/libs/slack-assistant/src/$1"
+      "^@xpr/nestjs-slack-assistant(|/.*)$": "<rootDir>/libs/slack-assistant/src/$1"
     }
   }
 }

@@ -51,19 +51,19 @@ class ChatController {
     }
   }
 
-  /**
-   * This endpoint is optional
-   */
-  @ThreadContextChanged()
-  async contextChanged({ saveThreadContext }: ThreadContextChangedArgs) {
-    await saveThreadContext();
-  }
+  // /**
+  //  * This endpoint is optional
+  //  */
+  // @ThreadContextChanged()
+  // async contextChanged({ saveThreadContext }: ThreadContextChangedArgs) {
+  //   await saveThreadContext();
+  // }
 
   /**
    * This endpoint is mandatory
    */
   @UserMessage()
-  async message({ message, say /*, client*/ }: UserMessageArgs) {
+  async message({ message, say, client }: UserMessageArgs) {
     // use the client to interact with slack
     // client.views.open()
     try {
