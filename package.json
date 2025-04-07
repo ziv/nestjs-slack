@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build-lib": "tsc -p libs/slack-assistant/tsconfig.lib.json",
+    "postbuild-lib": "cp libs/slack-assistant/package.json dist/libs/slack-assistant && cp libs/slack-assistant/readme.md dist/libs/slack-assistant",
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
