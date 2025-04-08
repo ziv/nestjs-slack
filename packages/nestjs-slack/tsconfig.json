@@ -1,0 +1,23 @@
+{
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "declaration": true,
+    "module": "node16",
+    "target": "ESNext",
+
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "*.ts"
+  ],
+  "exclude": [
+    "*.spec.ts"
+  ]
+}

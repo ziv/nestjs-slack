@@ -1,0 +1,13 @@
+{
+  "lint": {
+    "rules": {
+      "tags": [
+        "recommended"
+      ],
+      "exclude": [
+        "no-explicit-any",
+        "ban-types"
+      ]
+    }
+  }
+}

@@ -1,10 +1,18 @@
 {
-  "name": "@xpr/nestjs-slack-assistant",
-  "version": "0.0.1",
+  "name": "@xpr/nestjs-slack",
+  "version": "0.0.0",
   "description": "NestJS server implementation of the Slack Assistant",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
   "author": "Ziv Perry",
-  "private": false,
   "license": "MIT",
+  "keywords": [],
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ziv/nestjs-slack-assistant.git",
@@ -14,8 +22,13 @@
     "url": "https://github.com/ziv/nestjs-slack-assistant/issues"
   },
   "homepage": "https://github.com/ziv/nestjs-slack-assistant#readme",
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^22.10.6"
+  },
   "peerDependencies": {
     "@nestjs/microservices": ">=11.0.13",
-    "@slack/bolt": ">=4.2.1"
+    "@slack/bolt": ">=4.2.1",
+    "reflect-metadata": ">=0.2.2"
   }
 }
