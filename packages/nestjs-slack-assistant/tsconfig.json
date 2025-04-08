@@ -4,11 +4,10 @@
     "outDir": "../../dist/nestjs-slack-assistant",
     "esModuleInterop": true,
     "declaration": true,
-    "target": "ES2020",
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "module": "node16",
+    "target": "ESNext",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "types": [
       "node"
     ]
@@ -16,7 +15,12 @@
   "include": [
     "*.ts"
   ],
-  "exclude": [
-    "*.spec.ts"
+  "references": [
+    {
+      "path": "./tsconfig-lib.json"
+    },
+    {
+      "path": "./tsconfig-test.json"
+    }
   ]
 }

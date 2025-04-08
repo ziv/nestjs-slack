@@ -23,6 +23,9 @@
     "url": "https://github.com/ziv/nestjs-slack-assistant/issues"
   },
   "homepage": "https://github.com/ziv/nestjs-slack-assistant#readme",
+  "dependencies": {
+    "@xpr/nestjs-slack": "*"
+  },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^22.10.6"
