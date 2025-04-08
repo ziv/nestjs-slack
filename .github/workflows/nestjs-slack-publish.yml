@@ -30,7 +30,7 @@ jobs:
       - name: 🍓verify
         run: npm audit signatures
       - name: 🌈build
-        run: npm run build-lib
+        run: npm run build -w packages/nestjs-slack
       - name: 🦋release
         run: npx semantic-release
         env:
