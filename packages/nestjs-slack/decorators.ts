@@ -34,7 +34,7 @@ const normalizePattern = (pattern: AllConstraints) => {
  * @param type type of listener
  * @param event how to identify the event
  */
-function eventDecorator<T extends AllConstraints>(
+export function eventDecorator<T extends AllConstraints>(
   type: string,
   event: T,
 ): MethodDecorator {
