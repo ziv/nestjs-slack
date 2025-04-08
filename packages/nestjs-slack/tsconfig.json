@@ -1,15 +1,13 @@
 {
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
+    "outDir": "../../dist/nestjs-slack",
     "esModuleInterop": true,
     "declaration": true,
     "module": "node16",
     "target": "ESNext",
-
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-
-
     "types": [
       "node"
     ]
