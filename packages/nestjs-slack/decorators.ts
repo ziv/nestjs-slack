@@ -1,53 +1,7 @@
-import { EventPattern, MessagePattern } from '@nestjs/microservices';
-import {
-  ActionConstraints,
-  OptionsConstraints,
-  ShortcutConstraints,
-  ViewConstraints,
-} from '@slack/bolt';
+import { ActionConstraints, OptionsConstraints, ShortcutConstraints, ViewConstraints } from '@slack/bolt';
+import { eventDecorator, messageDecorator, type Pattern } from './utils';
 
-export type Pattern = string | RegExp;
-export type ShortCutId = Pattern | ShortcutConstraints;
-export type ActionId = Pattern | ActionConstraints;
-export type ViewId = Pattern | ViewConstraints;
-export type OptionId = OptionsConstraints;
-
-export type AllConstraints =
-  | Pattern
-  | ActionConstraints
-  | ShortcutConstraints
-  | ViewConstraints
-  | OptionsConstraints;
-
-const normalizePattern = (pattern: AllConstraints) => {
-  if (typeof pattern === 'string') {
-    return pattern;
-  }
-  if (pattern instanceof RegExp) {
-    return pattern.toString();
-  }
-  return JSON.stringify(pattern);
-};
-
-/**
- * Create method decorator
- * @param type type of listener
- * @param event how to identify the event
- */
-export function eventDecorator<T extends AllConstraints>(
-  type: string,
-  event: T,
-): MethodDecorator {
-  return (
-    target: object,
-    key: string | symbol,
-    descriptor: TypedPropertyDescriptor<any>,
-  ) => EventPattern(`${type}://${normalizePattern(event)}`, {
-    type,
-    event,
-  })(target, key, descriptor);
-
-}
+export { Pattern };
 
 /**
  * @see https://tools.slack.dev/bolt-js/reference/
@@ -70,15 +24,10 @@ export const EventTypes = {
  */
 export function SlackEvent(event: string): MethodDecorator {
   // todo input validation (types for event)
-  return (
-    target: object,
-    key: string | symbol,
-    descriptor: TypedPropertyDescriptor<any>,
-  ) => EventPattern(`${EventTypes.Event}://${normalizePattern(event)}`, {
-    type: EventTypes.Event,
-    event,
-  })(target, key, descriptor);
+  return eventDecorator(EventTypes.Event, event);
 }
+
+export type ShortCutId = Pattern | ShortcutConstraints;
 
 /**
  * Decorator for shortcut events
@@ -103,6 +52,8 @@ export function SlackCommand(commandId: Pattern): MethodDecorator {
   return eventDecorator(EventTypes.Command, commandId);
 }
 
+export type ActionId = Pattern | ActionConstraints;
+
 /**
  * Decorator for action events
  * @see guide https://tools.slack.dev/bolt-js/concepts/actions
@@ -113,6 +64,8 @@ export function SlackAction(actionId: ActionId): MethodDecorator {
   return eventDecorator(EventTypes.Action, actionId);
 }
 
+export type ViewId = Pattern | ViewConstraints;
+
 /**
  * Decorator for view events
  * @see guide https://tools.slack.dev/bolt-js/concepts/view-submissions
@@ -122,6 +75,8 @@ export function SlackAction(actionId: ActionId): MethodDecorator {
 export function SlackView(viewId: ViewId): MethodDecorator {
   return eventDecorator(EventTypes.View, viewId);
 }
+
+export type OptionId = OptionsConstraints;
 
 /**
  * Decorator for options events
@@ -141,15 +96,6 @@ export function SlackOption(optionId: OptionId): MethodDecorator {
  * @param pattern
  * @constructor
  */
-export function SlackMessage(pattern: string | RegExp = '*'): MethodDecorator {
-  return (
-    target: object,
-    key: string | symbol,
-    descriptor: TypedPropertyDescriptor<any>,
-  ) => {
-    return MessagePattern(`message://${normalizePattern(pattern)}`, {
-      type: 'message',
-      pattern,
-    })(target, key, descriptor);
-  };
+export function SlackMessage(pattern: Pattern = '*'): MethodDecorator {
+  return messageDecorator('message', pattern);
 }

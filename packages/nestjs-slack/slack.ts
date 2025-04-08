@@ -13,7 +13,7 @@ import type {
 } from '@slack/bolt/dist/types';
 import { EventTypes, OptionId, Pattern } from './decorators';
 
-export type SlackAssistantOptions = {
+export type SlackOptions = {
   /**
    * Slack application options with required types
    * @see https://github.com/slackapi/bolt-js
@@ -26,7 +26,7 @@ type Extra = { type: string; event: Pattern };
 export default class Slack extends Server implements CustomTransportStrategy {
   #app?: App;
 
-  constructor(readonly options: SlackAssistantOptions) {
+  constructor(readonly options: SlackOptions) {
     super();
   }
 
@@ -39,7 +39,7 @@ export default class Slack extends Server implements CustomTransportStrategy {
   }
 
   async close(): Promise<void> {
-    // this.#app && (await this.#app.stop());
+    this.#app && (await this.#app.stop());
   }
 
   // todo web-client/WebClient events for better typing of the event argument
