@@ -10,7 +10,7 @@ A NestJS microservice transport for
 A NestJS microservice transport for
 [Slack Bolt Assistant](https://github.com/slackapi/bolt-js/blob/main/src/Assistant.ts).
 
----
+--- 
 
 ## Usage
 

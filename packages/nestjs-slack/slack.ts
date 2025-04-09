@@ -14,6 +14,8 @@ import type {
 import { EventTypes, OptionId, Pattern } from './decorators';
 import { adjustLogger } from './utils';
 
+type Extra = { type: string; event: Pattern };
+
 export type SlackOptions = {
   /**
    * Slack application options with required types
@@ -21,8 +23,6 @@ export type SlackOptions = {
    */
   slack: AppOptions;
 };
-
-type Extra = { type: string; event: Pattern };
 
 export default class Slack extends Server implements CustomTransportStrategy {
   #app?: App;
