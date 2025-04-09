@@ -1,10 +1,10 @@
-import { EventPattern, MessagePattern } from '@nestjs/microservices';
-import { type Logger, LogLevel } from '@slack/bolt';
+import { EventPattern, MessagePattern } from "@nestjs/microservices";
+import { type Logger, LogLevel } from "@slack/bolt";
 
 export type Pattern = string | RegExp;
 
 const normalizePattern = (pattern: unknown): string => {
-  if (typeof pattern === 'string') {
+  if (typeof pattern === "string") {
     return pattern;
   }
   if (pattern instanceof RegExp) {
@@ -52,8 +52,8 @@ export function messageDecorator(
 
 export function adjustLogger(logger: any): Logger {
   // minimal logger interface required by the library
-  for (const method of ['debug', 'info', 'warn', 'error']) {
-    if (typeof logger[method] !== 'function') {
+  for (const method of ["debug", "info", "warn", "error"]) {
+    if (typeof logger[method] !== "function") {
       throw new Error(`Logger must implement "${method}" method`);
     }
   }
