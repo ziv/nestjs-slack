@@ -17,18 +17,16 @@ const normalizePattern = (pattern: unknown): string => {
  * @param type type of listener
  * @param event how to identify the event
  */
-export function eventDecorator<T>(
-  type: string,
-  event: T,
-): MethodDecorator {
+export function eventDecorator<T>(type: string, event: T): MethodDecorator {
   return (
     target: object,
     key: string | symbol,
     descriptor: TypedPropertyDescriptor<any>,
-  ) => EventPattern(`${type}://${normalizePattern(event)}`, {
-    type,
-    event,
-  })(target, key, descriptor);
+  ): void | TypedPropertyDescriptor<any> =>
+    EventPattern(`${type}://${normalizePattern(event)}`, {
+      type,
+      event,
+    })(target, key, descriptor);
 }
 
 /**
@@ -36,16 +34,14 @@ export function eventDecorator<T>(
  * @param type type of listener
  * @param pattern how to identify the message
  */
-export function messageDecorator(
-  type: string,
-  pattern: Pattern,
-): MethodDecorator {
+export function messageDecorator(type: string, pattern: Pattern): MethodDecorator {
   return (
     target: object,
     key: string | symbol,
     descriptor: TypedPropertyDescriptor<any>,
-  ) => MessagePattern(`${type}://${normalizePattern(pattern)}`, {
-    type,
-    pattern,
-  })(target, key, descriptor);
+  ): void | TypedPropertyDescriptor<any> =>
+    MessagePattern(`${type}://${normalizePattern(pattern)}`, {
+      type,
+      pattern,
+    })(target, key, descriptor);
 }

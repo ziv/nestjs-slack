@@ -2,12 +2,12 @@ import type {
   AssistantThreadContextChangedMiddleware,
   AssistantThreadStartedMiddleware,
   AssistantUserMessageMiddleware,
-} from '@slack/bolt/dist/Assistant';
-import type { AssistantConfig } from '@slack/bolt/dist/Assistant';
-import type { AssistantThreadContextStore } from '@slack/bolt/dist/AssistantThreadContextStore';
-import Slack, { type SlackOptions } from '@xpr/nestjs-slack/slack';
-import { EventTypes } from './decorators';
-import { Assistant } from '@slack/bolt';
+} from "@slack/bolt/dist/Assistant";
+import type { AssistantConfig } from "@slack/bolt/dist/Assistant";
+import type { AssistantThreadContextStore } from "@slack/bolt/dist/AssistantThreadContextStore";
+import Slack, { type SlackOptions } from "@xpr/nestjs-slack/slack";
+import { EventTypes } from "./decorators";
+import { Assistant } from "@slack/bolt";
 
 export type SlackAssistantOptions = SlackOptions & {
   /**
@@ -34,7 +34,8 @@ export default class SlackAssistant extends Slack {
           config.threadStarted = handler as AssistantThreadStartedMiddleware;
           break;
         case EventTypes.ThreadContextChanged:
-          config.threadContextChanged = handler as AssistantThreadContextChangedMiddleware;
+          config.threadContextChanged =
+            handler as AssistantThreadContextChangedMiddleware;
           break;
         case EventTypes.UserMessage:
           config.userMessage = handler as AssistantUserMessageMiddleware;
@@ -45,11 +46,11 @@ export default class SlackAssistant extends Slack {
     }
 
     if (!config.userMessage) {
-      throw new Error('UserMessage handler is required');
+      throw new Error("UserMessage handler is required");
     }
 
     if (!config.threadStarted) {
-      throw new Error('ThreadStarted handler is required');
+      throw new Error("ThreadStarted handler is required");
     }
 
     this.app().assistant(new Assistant(config as AssistantConfig));

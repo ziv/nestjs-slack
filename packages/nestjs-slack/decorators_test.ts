@@ -1,47 +1,46 @@
 import {
-  SlackEvent,
-  SlackOption,
-  SlackCommand,
   SlackAction,
+  SlackCommand,
+  SlackEvent,
+  SlackMessage,
+  SlackOption,
   SlackShortcut,
   SlackView,
-  SlackMessage,
-} from './decorators';
+} from "./decorators";
 
 class TestClass {
-
-  @SlackMessage('test')
+  @SlackMessage("test")
   slackMessage() {
-    return 'test';
+    return "test";
   }
 
-  @SlackView('test')
+  @SlackView("test")
   slackView() {
-    return 'test';
+    return "test";
   }
 
-  @SlackShortcut('test')
+  @SlackShortcut("test")
   slackShortcut() {
-    return 'test';
+    return "test";
   }
 
-  @SlackAction('test')
+  @SlackAction("test")
   slackAction() {
-    return 'test';
+    return "test";
   }
 
-  @SlackCommand('test')
+  @SlackCommand("test")
   slackCommand() {
-    return 'test';
+    return "test";
   }
 
-  @SlackOption({ action_id: 'test' })
+  @SlackOption({ action_id: "test" })
   slackOption() {
-    return 'test';
+    return "test";
   }
 
-  @SlackEvent('test')
+  @SlackEvent("test")
   slackEvent() {
-    return 'test';
+    return "test";
   }
 }

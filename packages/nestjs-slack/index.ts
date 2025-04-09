@@ -1,4 +1,4 @@
-import Slack from './slack';
+import Slack from "./slack";
 
-export * from './decorators';
+export * from "./decorators";
 export { Slack };

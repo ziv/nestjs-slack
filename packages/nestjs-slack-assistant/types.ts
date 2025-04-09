@@ -2,8 +2,8 @@ import type {
   AssistantThreadContextChangedMiddlewareArgs,
   AssistantThreadStartedMiddlewareArgs,
   AssistantUserMessageMiddlewareArgs,
-} from '@slack/bolt/dist/Assistant';
-import { AllMiddlewareArgs } from '@slack/bolt/dist/types/middleware';
+} from "@slack/bolt/dist/Assistant";
+import { AllMiddlewareArgs } from "@slack/bolt/dist/types/middleware";
 
 // todo fix those types
 export type ThreadStartedArgs =

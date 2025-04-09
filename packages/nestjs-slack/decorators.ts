@@ -1,5 +1,10 @@
-import { ActionConstraints, OptionsConstraints, ShortcutConstraints, ViewConstraints } from '@slack/bolt';
-import { eventDecorator, messageDecorator, type Pattern } from './utils';
+import {
+  ActionConstraints,
+  OptionsConstraints,
+  ShortcutConstraints,
+  ViewConstraints,
+} from "@slack/bolt";
+import { eventDecorator, messageDecorator, type Pattern } from "./utils";
 
 export { Pattern };
 
@@ -7,12 +12,12 @@ export { Pattern };
  * @see https://tools.slack.dev/bolt-js/reference/
  */
 export const EventTypes = {
-  Event: 'event',
-  Shortcut: 'shortcut',
-  Command: 'command',
-  Action: 'action',
-  View: 'view',
-  Option: 'option',
+  Event: "event",
+  Shortcut: "shortcut",
+  Command: "command",
+  Action: "action",
+  View: "view",
+  Option: "option",
 };
 
 /**
@@ -96,6 +101,6 @@ export function SlackOption(optionId: OptionId): MethodDecorator {
  * @param pattern
  * @constructor
  */
-export function SlackMessage(pattern: Pattern = '*'): MethodDecorator {
-  return messageDecorator('message', pattern);
+export function SlackMessage(pattern: Pattern = "*"): MethodDecorator {
+  return messageDecorator("message", pattern);
 }

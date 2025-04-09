@@ -33,6 +33,8 @@ export default class Slack extends Server implements CustomTransportStrategy {
   async listen(callback: () => void): Promise<void> {
     for (const handler of this.getHandlers().values()) {
       this.register(handler);
+      const { type, event } = handler.extras as Extra;
+      this.logger.log(`Handler [${type}] registered with (${event})`);
     }
     await this.app().start();
     callback();
@@ -42,14 +44,12 @@ export default class Slack extends Server implements CustomTransportStrategy {
     this.#app && (await this.#app.stop());
   }
 
-  // todo web-client/WebClient events for better typing of the event argument
   on(): void {
     throw new Error('Use SlackEvent decorator to register events');
   }
 
   unwrap<T>(): T {
-    // return this.#app as T;
-    throw new Error('Use SlackEvent decorator to register events');
+    return this.#app as T;
   }
 
   /**
@@ -89,7 +89,7 @@ export default class Slack extends Server implements CustomTransportStrategy {
   }
 
   /**
-   * Get the Bolt app instance
+   * Get/Create Bolt app instance
    * @protected
    */
   protected app(): App {

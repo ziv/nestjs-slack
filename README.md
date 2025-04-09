@@ -1,7 +1,16 @@
-# @xpr/slack-assistant
+# NestJS/Slack Integrations
+
+## @xpr/nestjs-slack
 
 A NestJS microservice transport for
-[Slack Assistant](https://github.com/slackapi/bolt-js/blob/main/src/Assistant.ts).
+[Slack Bolt Apps](https://github.com/slackapi/bolt-js).
+
+## @xpr/nestjs-slack-assistant
+
+A NestJS microservice transport for
+[Slack Bolt Assistant](https://github.com/slackapi/bolt-js/blob/main/src/Assistant.ts).
+
+---
 
 ## Usage
 
