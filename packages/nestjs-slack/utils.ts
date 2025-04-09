@@ -1,9 +1,9 @@
-import { EventPattern, MessagePattern } from '@nestjs/microservices';
+import { EventPattern, MessagePattern } from "@nestjs/microservices";
 
 export type Pattern = string | RegExp;
 
 const normalizePattern = (pattern: unknown): string => {
-  if (typeof pattern === 'string') {
+  if (typeof pattern === "string") {
     return pattern;
   }
   if (pattern instanceof RegExp) {
@@ -34,7 +34,10 @@ export function eventDecorator<T>(type: string, event: T): MethodDecorator {
  * @param type type of listener
  * @param pattern how to identify the message
  */
-export function messageDecorator(type: string, pattern: Pattern): MethodDecorator {
+export function messageDecorator(
+  type: string,
+  pattern: Pattern,
+): MethodDecorator {
   return (
     target: object,
     key: string | symbol,

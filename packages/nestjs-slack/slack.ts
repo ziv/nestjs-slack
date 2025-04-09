@@ -2,16 +2,16 @@ import {
   type CustomTransportStrategy,
   type MessageHandler,
   Server,
-} from '@nestjs/microservices';
-import { App, type AppOptions, SlackOptionsMiddlewareArgs } from '@slack/bolt';
+} from "@nestjs/microservices";
+import { App, type AppOptions, SlackOptionsMiddlewareArgs } from "@slack/bolt";
 import type {
   Middleware,
   SlackActionMiddlewareArgs,
   SlackCommandMiddlewareArgs,
   SlackEventMiddlewareArgs,
   SlackShortcutMiddlewareArgs,
-} from '@slack/bolt/dist/types';
-import { EventTypes, OptionId, Pattern } from './decorators';
+} from "@slack/bolt/dist/types";
+import { EventTypes, OptionId, Pattern } from "./decorators";
 
 export type SlackOptions = {
   /**
@@ -45,7 +45,7 @@ export default class Slack extends Server implements CustomTransportStrategy {
   }
 
   on(): void {
-    throw new Error('Use SlackEvent decorator to register events');
+    throw new Error("Use SlackEvent decorator to register events");
   }
 
   unwrap<T>(): T {
@@ -95,7 +95,7 @@ export default class Slack extends Server implements CustomTransportStrategy {
   protected app(): App {
     if (!this.#app) {
       this.#app = new App(this.options.slack);
-      this.logger.log('Bolt app created');
+      this.logger.log("Bolt app created");
     }
     return this.#app;
   }
