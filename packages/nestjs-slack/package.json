@@ -4,7 +4,8 @@
   "description": "NestJS server implementation of the Slack Assistant",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -p tsconfig-lib.json && cp package.json ../../dist/nestjs-slack/. && cp readme.md ../../dist/nestjs-slack/."
+    "build": "tsc -p tsconfig-lib.json",
+    "postbuild": "cp package.json ../../dist/nestjs-slack/. && cp readme.md ../../dist/nestjs-slack/."
   },
   "author": "Ziv Perry",
   "license": "MIT",

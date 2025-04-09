@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "node --test *_test.js",
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig-lib.json",
+    "postbuild": "cp package.json ../../dist/nestjs-slack-assistant/. && cp readme.md ../../dist/nestjs-slack-assistant/."
   },
   "author": "Ziv Perry",
   "license": "MIT",
