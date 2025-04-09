@@ -2,17 +2,17 @@ import {
   type CustomTransportStrategy,
   type MessageHandler,
   Server,
-} from "@nestjs/microservices";
-import { App, type AppOptions, SlackOptionsMiddlewareArgs } from "@slack/bolt";
+} from '@nestjs/microservices';
+import { App, type AppOptions, SlackOptionsMiddlewareArgs } from '@slack/bolt';
 import type {
   Middleware,
   SlackActionMiddlewareArgs,
   SlackCommandMiddlewareArgs,
   SlackEventMiddlewareArgs,
   SlackShortcutMiddlewareArgs,
-} from "@slack/bolt/dist/types";
-import { EventTypes, OptionId, Pattern } from "./decorators";
-import { adjustLogger } from "./utils";
+} from '@slack/bolt/dist/types';
+import { EventTypes, OptionId, Pattern } from './decorators';
+import { adjustLogger } from './utils';
 
 export type SlackOptions = {
   /**
@@ -34,8 +34,6 @@ export default class Slack extends Server implements CustomTransportStrategy {
   async listen(callback: () => void): Promise<void> {
     for (const handler of this.getHandlers().values()) {
       this.register(handler);
-      const { type, event } = handler.extras as Extra;
-      this.logger.log(`Handler [${type}] registered with (${event})`);
     }
     await this.app().start();
     callback();
@@ -46,7 +44,7 @@ export default class Slack extends Server implements CustomTransportStrategy {
   }
 
   on(): void {
-    throw new Error("Use SlackEvent decorator to register events");
+    throw new Error('Use SlackEvent decorator to register events');
   }
 
   unwrap<T>(): T {
@@ -60,6 +58,7 @@ export default class Slack extends Server implements CustomTransportStrategy {
    */
   protected register(handler: MessageHandler) {
     const { type, event } = handler.extras as Extra;
+    this.logger.log(`Registering handler of type [${type}] with (${event})`);
     switch (type) {
       case EventTypes.Shortcut:
         return this.app().shortcut(
@@ -100,7 +99,7 @@ export default class Slack extends Server implements CustomTransportStrategy {
         this.options.slack.logger = adjustLogger(this.logger);
       }
       this.#app = new App(this.options.slack);
-      this.logger.log("Bolt app created");
+      this.logger.log('Bolt app created');
     }
     return this.#app;
   }
