@@ -51,18 +51,27 @@ export function messageDecorator(
 }
 
 export function adjustLogger(logger: any): Logger {
-  if (!('debug' in logger && 'info' in logger && 'warn' in logger && 'error' in logger)) {
-    throw new Error('Logger must implement the minimal Logger interface');
+  // minimal logger interface required by the library
+  for (const method of ['debug', 'info', 'warn', 'error']) {
+    if (typeof logger[method] !== 'function') {
+      throw new Error(`Logger must implement "${method}" method`);
+    }
   }
+
+  const noop = () => {
+  };
+
   return Object.assign(logger, {
     setLevel(_: LogLevel) {
       // don't allow library to set the level
     },
-    setName(_: string) {
-      // don't allow library to set the name
+    setName(name: string) {
+      // setContext is alias for setName
+      (logger.setName ?? logger.setContext ?? noop)(name);
     },
     getLevel(): LogLevel {
-      // always return the lowest supported level
+      // always return the lowest supported level (by library, not real logger)
+      // to avoid filtering log messages by library instead of real logger
       return LogLevel.DEBUG;
     },
   }) as Logger;
