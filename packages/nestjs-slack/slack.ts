@@ -15,6 +15,11 @@ import { EventTypes, OptionId, Pattern } from './decorators';
 import { adjustLogger } from './utils';
 
 type Extra = { type: string; event: Pattern };
+type ShortcutHandler = Middleware<SlackShortcutMiddlewareArgs>;
+type ActionHandler = Middleware<SlackActionMiddlewareArgs>;
+type EventHandler = Middleware<SlackEventMiddlewareArgs>;
+type CommandHandler = Middleware<SlackCommandMiddlewareArgs>;
+type OptionsHandler = Middleware<SlackOptionsMiddlewareArgs>;
 
 export type SlackOptions = {
   /**
@@ -58,34 +63,27 @@ export default class Slack extends Server implements CustomTransportStrategy {
    */
   protected register(handler: MessageHandler) {
     const { type, event } = handler.extras as Extra;
-    this.logger.log(`Registering handler of type [${type}] with (${event})`);
     switch (type) {
       case EventTypes.Shortcut:
-        return this.app().shortcut(
-          event,
-          handler as Middleware<SlackShortcutMiddlewareArgs>,
-        );
+        this.app().shortcut(event, handler as ShortcutHandler);
+        break;
       case EventTypes.Action:
-        return this.app().action(
-          event,
-          handler as Middleware<SlackActionMiddlewareArgs>,
-        );
+        this.app().action(event, handler as ActionHandler);
+        break;
       case EventTypes.Event:
-        return this.app().event<string>(
-          event as string, // todo improve by providing types
-          handler as Middleware<SlackEventMiddlewareArgs>,
-        );
+        // todo improve by providing types for events names
+        this.app().event<string>(event as string, handler as EventHandler);
+        break;
       case EventTypes.Command:
-        return this.app().command(
-          event,
-          handler as Middleware<SlackCommandMiddlewareArgs>,
-        );
+        this.app().command(event, handler as CommandHandler);
+        break;
       case EventTypes.Option:
-        return this.app().options(
-          event as OptionId,
-          handler as Middleware<SlackOptionsMiddlewareArgs>,
-        );
+        this.app().options(event as OptionId, handler as OptionsHandler);
+        break;
+      default:
+        throw new Error(`Unknown event type ${type}`);
     }
+    this.logger.log(`Handler of type [${type}] registered with id(${event})`);
   }
 
   /**
