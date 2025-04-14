@@ -4,7 +4,9 @@
 /build
 /packages/**/*.js
 /packages/**/*.d.ts
+/packages/**/*.d.ts.map
 /packages/**/node_modules
+/**/*.tsbuildinfo
 # Logs
 logs
 *.log

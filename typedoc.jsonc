@@ -1,0 +1,7 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "NestJS Slack Integration",
+  "includeVersion": false,
+  "entryPointStrategy": "packages",
+  "entryPoints": ["packages/nestjs-slack", "packages/nestjs-slack-assistant"]
+}

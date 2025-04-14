@@ -10,6 +10,11 @@
   ],
   "scripts": {
     "build": "npm run build -w packages/nestjs-slack && npm run build -w packages/nestjs-slack-assistant",
-    "lint": "deno fmt && deno lint"
+    "lint": "deno fmt && deno lint",
+    "predocs": "npm run docs --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.5",
+    "typedoc": "^0.28.2"
   }
 }

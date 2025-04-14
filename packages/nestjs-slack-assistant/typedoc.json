@@ -1,0 +1,10 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "includeVersion": true,
+  "json": "docs.json",
+  "tsconfig": "tsconfig-lib.json",
+  "entryPoints": ["index.ts"],
+  "exclude": [
+    "*_test.ts"
+  ]
+}
