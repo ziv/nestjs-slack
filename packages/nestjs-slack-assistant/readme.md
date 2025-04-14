@@ -1,4 +1,7 @@
-# @xpr/slack-assistant
+# @xpr/nestjs-slack-assistant
+
+This package export all decorators from `@xpr/nestjs-slack` package. See [@xpr/nestjs-slack](../nestjs-slack/readme.md)
+documentation for more details.
 
 ## Usage
 
@@ -8,27 +11,10 @@
 npm i @xpr/nestjs-slack-assistant
 ```
 
-### Controller
-
-Minimal required implementation includes a controller and a message handler
-decorated with `@UserMessage`.
-
-```typescript
-@Controller()
-class ChatController {
-  @UserMessage()
-  async message({ message, say /*, client*/ }: UserMessageArgs) {
-    const text = (message as { text: string }).text;
-    await say(`You said: ${text}`);
-  }
-}
-```
-
 ### Transport
 
-Minimal required configuration includes
-[token](https://api.slack.com/concepts/token-types#bot) and
-[app token](https://api.slack.com/concepts/token-types#app-level).
+Minimal required configuration includes [token](https://api.slack.com/concepts/token-types#bot)
+and [app token](https://api.slack.com/concepts/token-types#app-level).
 
 More information about slack tokens: https://api.slack.com/concepts/token-types
 
@@ -37,13 +23,18 @@ const token = process.env.SLACK_BOT_TOKEN as string;
 const appToken = process.env.SLACK_APP_TOKEN as string;
 
 const app = await NestFactory.createMicroservice(MyChatModule, {
-  strategy: new SlackAssistant({ slack: { token, appToken } }),
+  strategy: new SlackAssistant({
+    slack: {
+      token,
+      appToken
+    }
+  }),
 });
 
 await app.listen();
 ```
 
-# Full Fledged Controller
+### Controller
 
 The package exports 3 decorators:
 
@@ -58,7 +49,8 @@ The only mandatory decorator is `@UserMessage`, but you can use the other two to
 handle thread context changes and thread started events.
 
 ```typescript
-@Controller()
+
+@SlackController()
 class ChatController {
   @ThreadStarted()
   async start(

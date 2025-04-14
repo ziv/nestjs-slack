@@ -5,7 +5,8 @@
   "license": "MIT",
   "workspaces": [
     "packages/nestjs-slack",
-    "packages/nestjs-slack-assistant"
+    "packages/nestjs-slack-assistant",
+    "packages/nestjs-slack-example-app"
   ],
   "scripts": {
     "build": "npm run build -w packages/nestjs-slack && npm run build -w packages/nestjs-slack-assistant",
