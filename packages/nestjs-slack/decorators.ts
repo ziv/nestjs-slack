@@ -7,6 +7,17 @@ import {
 import { Controller } from '@nestjs/common';
 import { eventDecorator, messageDecorator, type Pattern } from './utils';
 
+// types to use in decorated methods
+export type {
+  SlackActionMiddlewareArgs,
+  SlackCommandMiddlewareArgs,
+  SlackShortcutMiddlewareArgs,
+  SlackEventMiddlewareArgs,
+  SlackViewMiddlewareArgs,
+  SlackOptionsMiddlewareArgs,
+  AllMiddlewareArgs,
+} from '@slack/bolt/dist/types';
+
 export { Pattern };
 
 /**
