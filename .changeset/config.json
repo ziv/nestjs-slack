@@ -3,9 +3,13 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [],
-  "linked": [],
-  "access": "restricted",
+  "linked": [
+    ["@xpr/nestjs-slack", "@xpr/nestjs-slack-assistant"]
+  ],
+  "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": [
+    "nestjs-slack-example-app"
+  ]
 }

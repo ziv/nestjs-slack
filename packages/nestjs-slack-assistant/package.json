@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node --test *_test.js",
-    "build": "tsc -p tsconfig-lib.json",
-    "postbuild": "cp package.json ../../dist/nestjs-slack-assistant/. && cp readme.md ../../dist/nestjs-slack-assistant/."
+    "build": "tsc -p tsconfig-lib.json"
   },
   "author": "Ziv Perry",
   "license": "MIT",
@@ -34,5 +33,10 @@
   "peerDependencies": {
     "@nestjs/microservices": ">=11.0.13",
     "@slack/bolt": ">=4.2.1"
-  }
+  },
+  "files": [
+    "*.js",
+    "*.d.ts",
+    "readme.md"
+  ]
 }
