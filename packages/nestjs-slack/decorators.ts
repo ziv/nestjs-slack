@@ -1,24 +1,22 @@
-import {
-  ActionConstraints,
-  OptionsConstraints,
-  ShortcutConstraints,
-  ViewConstraints,
-} from '@slack/bolt';
+import { ActionConstraints, OptionsConstraints, ShortcutConstraints, ViewConstraints } from '@slack/bolt';
 import { Controller } from '@nestjs/common';
-import { eventDecorator, messageDecorator, type Pattern } from './utils';
+import { eventDecorator, type Pattern } from './utils';
 
 // types to use in decorated methods
-export type {
+import type {
+  AllMiddlewareArgs,
+  AnyMiddlewareArgs,
   SlackActionMiddlewareArgs,
   SlackCommandMiddlewareArgs,
-  SlackShortcutMiddlewareArgs,
   SlackEventMiddlewareArgs,
-  SlackViewMiddlewareArgs,
   SlackOptionsMiddlewareArgs,
-  AllMiddlewareArgs,
+  SlackShortcutMiddlewareArgs,
+  SlackViewMiddlewareArgs,
 } from '@slack/bolt/dist/types';
 
 export { Pattern };
+
+export type EndpointArgs<T extends AnyMiddlewareArgs> = T & AllMiddlewareArgs;
 
 /**
  * @see https://tools.slack.dev/bolt-js/reference/
@@ -30,6 +28,7 @@ export const EventTypes = {
   Action: 'action',
   View: 'view',
   Option: 'option',
+  Message: 'message',
 };
 
 /**
@@ -38,6 +37,11 @@ export const EventTypes = {
 export function SlackController(): ClassDecorator {
   return (target) => Controller()(target);
 }
+
+/**
+ * Arguments for the slack event handler
+ */
+export type SlackEventArgs = EndpointArgs<SlackEventMiddlewareArgs>;
 
 /**
  * Decorator for event events
@@ -50,6 +54,14 @@ export function SlackEvent(event: string): MethodDecorator {
   return eventDecorator(EventTypes.Event, event);
 }
 
+/**
+ * Arguments for the slack shortcut handler
+ */
+export type SlackShortcutArgs = EndpointArgs<SlackShortcutMiddlewareArgs>;
+
+/**
+ * Shortcut id
+ */
 export type ShortCutId = Pattern | ShortcutConstraints;
 
 /**
@@ -63,6 +75,11 @@ export function SlackShortcut(shortcutId: ShortCutId): MethodDecorator {
 }
 
 /**
+ * Arguments for the slack command handler
+ */
+export type SlackCommandArgs = EndpointArgs<SlackCommandMiddlewareArgs>;
+
+/**
  * Decorator for command events
  * @see guide https://tools.slack.dev/bolt-js/concepts/commands
  * @see api https://api.slack.com/interactivity/slash-commands
@@ -73,6 +90,14 @@ export function SlackCommand(commandId: Pattern): MethodDecorator {
   return eventDecorator(EventTypes.Command, commandId);
 }
 
+/**
+ * Arguments for the slack action handler
+ */
+export type SlackActionArgs = EndpointArgs<SlackActionMiddlewareArgs>;
+
+/**
+ * Action id
+ */
 export type ActionId = Pattern | ActionConstraints;
 
 /**
@@ -84,6 +109,14 @@ export function SlackAction(actionId: ActionId): MethodDecorator {
   return eventDecorator(EventTypes.Action, actionId);
 }
 
+/**
+ * Arguments for the slack view handler
+ */
+export type SlackViewArgs = EndpointArgs<SlackViewMiddlewareArgs>;
+
+/**
+ * View id
+ */
 export type ViewId = Pattern | ViewConstraints;
 
 /**
@@ -95,6 +128,14 @@ export function SlackView(viewId: ViewId): MethodDecorator {
   return eventDecorator(EventTypes.View, viewId);
 }
 
+/**
+ * Arguments for the slack option handler
+ */
+export type SlackOptionArgs = EndpointArgs<SlackOptionsMiddlewareArgs>;
+
+/**
+ * Options id
+ */
 export type OptionId = OptionsConstraints;
 
 /**
@@ -106,6 +147,8 @@ export function SlackOption(optionId: OptionId): MethodDecorator {
   return eventDecorator(EventTypes.Option, optionId);
 }
 
+export type SlackMessageArgs = EndpointArgs<SlackEventMiddlewareArgs<'message'>>;
+
 /**
  * Decorator for message events
  *
@@ -114,5 +157,5 @@ export function SlackOption(optionId: OptionId): MethodDecorator {
  * @param pattern
  */
 export function SlackMessage(pattern: Pattern = '*'): MethodDecorator {
-  return messageDecorator('message', pattern);
+  return eventDecorator(EventTypes.Message, pattern);
 }
