@@ -8,7 +8,12 @@
   },
   "author": "Ziv Perry",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "slack",
+    "nestjs",
+    "assistant",
+    "ai"
+  ],
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=10.0.0"
@@ -29,14 +34,15 @@
     "semantic-release-monorepo": "^8.0.2"
   },
   "peerDependencies": {
-    "@xpr/nestjs-slack": ">=1.0.1",
+    "@xpr/nestjs-slack": "*",
     "@nestjs/microservices": ">=11.0.13",
     "@slack/bolt": ">=4.2.1"
   },
   "files": [
     "*.js",
     "*.d.ts",
-    "readme.md"
+    "readme.md",
+    "license"
   ],
   "release": {
     "extends": "semantic-release-monorepo",
