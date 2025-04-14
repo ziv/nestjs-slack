@@ -42,7 +42,8 @@
   "files": [
     "*.js",
     "*.d.ts",
-    "readme.md"
+    "readme.md",
+    "license"
   ],
   "release": {
     "extends": "semantic-release-monorepo",
