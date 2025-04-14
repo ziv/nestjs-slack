@@ -16,13 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ziv/nestjs-slack-assistant.git",
-    "directory": "libs/slack-assistant"
+    "url": "git+https://github.com/ziv/nestjs-slack.git",
+    "directory": "packages/nestjs-slack-assistant"
   },
   "bugs": {
-    "url": "https://github.com/ziv/nestjs-slack-assistant/issues"
+    "url": "https://github.com/ziv/nestjs-slack/issues"
   },
-  "homepage": "https://github.com/ziv/nestjs-slack-assistant#readme",
+  "homepage": "https://github.com/ziv/nestjs-slack#readme",
   "dependencies": {
     "@xpr/nestjs-slack": "*"
   },
