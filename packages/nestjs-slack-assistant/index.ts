@@ -1,5 +1,5 @@
 import SlackAssistant from "./slack-assistant";
 
 export * from "./decorators";
-export * from "./types";
 export { SlackAssistant };
+export * from "@xpr/nestjs-slack";

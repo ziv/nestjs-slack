@@ -6,7 +6,7 @@ import type {
 import type { AssistantConfig } from "@slack/bolt/dist/Assistant";
 import type { AssistantThreadContextStore } from "@slack/bolt/dist/AssistantThreadContextStore";
 import Slack, { type SlackOptions } from "@xpr/nestjs-slack/slack";
-import { EventTypes } from "./decorators";
+import { AssistantEventTypes } from "./decorators";
 import { Assistant } from "@slack/bolt";
 
 export type SlackAssistantOptions = SlackOptions & {
@@ -30,14 +30,14 @@ export default class SlackAssistant extends Slack {
     for (const handler of this.getHandlers().values()) {
       const { type } = handler.extras as { type: string };
       switch (type) {
-        case EventTypes.ThreadStarted:
+        case AssistantEventTypes.ThreadStarted:
           config.threadStarted = handler as AssistantThreadStartedMiddleware;
           break;
-        case EventTypes.ThreadContextChanged:
+        case AssistantEventTypes.ThreadContextChanged:
           config.threadContextChanged =
             handler as AssistantThreadContextChangedMiddleware;
           break;
-        case EventTypes.UserMessage:
+        case AssistantEventTypes.UserMessage:
           config.userMessage = handler as AssistantUserMessageMiddleware;
           break;
         default:
