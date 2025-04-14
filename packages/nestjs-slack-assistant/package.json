@@ -22,9 +22,6 @@
     "url": "https://github.com/ziv/nestjs-slack/issues"
   },
   "homepage": "https://github.com/ziv/nestjs-slack#readme",
-  "dependencies": {
-    "@xpr/nestjs-slack": "*"
-  },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^22.10.6",
@@ -32,6 +29,7 @@
     "semantic-release-monorepo": "^8.0.2"
   },
   "peerDependencies": {
+    "@xpr/nestjs-slack": ">=1.0.1",
     "@nestjs/microservices": ">=11.0.13",
     "@slack/bolt": ">=4.2.1"
   },
