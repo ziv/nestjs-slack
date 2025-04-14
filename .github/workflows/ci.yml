@@ -1,4 +1,4 @@
-name: release nestjs-slack-assistant
+name: release nestjs-slack-assistant ci
 
 on:
   workflow_dispatch:
