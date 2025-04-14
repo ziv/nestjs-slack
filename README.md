@@ -1,5 +1,8 @@
 # NestJS/Slack Integrations
 
+<img alt="slack logo" height="100" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" />
+️<img alt="nestjs logo" height="100" src="https://upload.wikimedia.org/wikipedia/commons/a/a8/NestJS.svg" />
+
 See example application at
 [./packages/nestjs-slack-example-app/.](./packages/nestjs-slack-example-app/README.md)
 directory.
