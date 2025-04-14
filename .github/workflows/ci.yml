@@ -16,6 +16,10 @@ jobs:
       issues: write # to be able to comment on released issues
       pull-requests: write # to be able to comment on released pull requests
       id-token: write # to enable use of OIDC for npm provenance (npm and jsr)
+    inputs:
+      release-version:
+        description: 'Release version'
+        required: true
     steps:
       - name: ⛵️checkout
         uses: actions/checkout@v4
@@ -32,9 +36,6 @@ jobs:
       - name: 🌈build
         run: npm run build
       - name: 🦋release
-        uses: changesets/action@v1
-        with:
-          publish: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH }}
