@@ -1,6 +1,7 @@
 # NestJS/Slack Integrations
 
-See example application at [nestjs-slack-app](https://github.com/ziv/nestjs-slack-app/tree/main) repository.
+See example application at [./packages/nestjs-slack-example-app/.](./packages/nestjs-slack-example-app/README.md)
+directory.
 
 ### @xpr/nestjs-slack
 
