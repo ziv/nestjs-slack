@@ -1,12 +1,12 @@
 import type {
-  SlackEventArgs,
-  SlackOptionArgs,
-  SlackMessageArgs,
-  SlackViewArgs,
-  SlackShortcutArgs,
   SlackActionArgs,
   SlackCommandArgs,
-} from './decorators';
+  SlackEventArgs,
+  SlackMessageArgs,
+  SlackOptionArgs,
+  SlackShortcutArgs,
+  SlackViewArgs,
+} from "./decorators";
 import {
   SlackAction,
   SlackCommand,
@@ -15,41 +15,44 @@ import {
   SlackOption,
   SlackShortcut,
   SlackView,
-} from './decorators';
+} from "./decorators";
 
 class TestClass {
-  @SlackMessage('test')
+  @SlackMessage("test")
   slackMessage(args: SlackMessageArgs) {
     console.log(args);
   }
 
-  @SlackView('test')
+  @SlackView("test")
   slackView(args: SlackViewArgs) {
     console.log(args);
   }
 
-  @SlackShortcut('test')
+  @SlackShortcut("test")
   slackShortcut(args: SlackShortcutArgs) {
     console.log(args);
   }
 
-  @SlackAction('test')
+  @SlackAction("test")
   slackAction(args: SlackActionArgs) {
     console.log(args);
   }
 
-  @SlackCommand('test')
+  @SlackCommand("test")
   slackCommand(args: SlackCommandArgs) {
     console.log(args);
   }
 
-  @SlackOption({ action_id: 'test' })
+  @SlackOption({ action_id: "test" })
   slackOption(args: SlackOptionArgs) {
     console.log(args);
   }
 
-  @SlackEvent('test')
+  @SlackEvent("test")
   slackEvent(args: SlackEventArgs) {
     console.log(args);
   }
 }
+
+const testClass = new TestClass();
+console.log(testClass);

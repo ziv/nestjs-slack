@@ -10,14 +10,16 @@ cd nestjs-slack-app
 npm install
 ```
 
-2. Create a `.env` file in the root directory and add your Slack app credentials:
+2. Create a `.env` file in the root directory and add your Slack app
+   credentials:
 
 ```
 SLACK_APP_TOKEN=xapp....
 SLACK_BOT_TOKEN=xoxb....
 ```
 
-The `@xpr/nestjs-slack` and `@xpr/nestjs-slack-assistant` packages require application permissions based on your usage.
+The `@xpr/nestjs-slack` and `@xpr/nestjs-slack-assistant` packages require
+application permissions based on your usage.
 
 ```
 assistant:write

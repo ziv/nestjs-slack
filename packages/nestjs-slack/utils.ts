@@ -1,10 +1,10 @@
-import { EventPattern, MessagePattern } from '@nestjs/microservices';
-import { type Logger, LogLevel } from '@slack/bolt';
+import { EventPattern, MessagePattern } from "@nestjs/microservices";
+import { type Logger, LogLevel } from "@slack/bolt";
 
 export type Pattern = string | RegExp;
 
 const normalizePattern = (pattern: unknown): string => {
-  if (typeof pattern === 'string') {
+  if (typeof pattern === "string") {
     return pattern;
   }
   if (pattern instanceof RegExp) {
@@ -53,26 +53,26 @@ export function messageDecorator(
 export function adjustLogger(logger: any): Logger {
   // this patch required to support NestJS logger that not use the standard "info"
   // and use "log" instead
-  if (logger['log'] && !logger['info']) {
-    logger['info'] = logger['log'].bind(logger);
+  if (logger["log"] && !logger["info"]) {
+    logger["info"] = logger["log"].bind(logger);
   }
 
   // minimal logger interface required by @slack/bolt library
-  for (const method of ['debug', 'info', 'warn', 'error']) {
-    if (typeof logger[method] !== 'function') {
+  for (const method of ["debug", "info", "warn", "error"]) {
+    if (typeof logger[method] !== "function") {
       throw new Error(`Logger must implement "${method}" method`);
     }
   }
 
   // add compatibility with @slack/bolt library
 
-  if (!logger['setLevel']) {
+  if (!logger["setLevel"]) {
     logger.setLevel = () => {
       // don't allow library to set the level
     };
   }
 
-  if (!logger['getLevel']) {
+  if (!logger["getLevel"]) {
     logger.getLevel = () => {
       // always return the lowest supported level (by library, not real logger)
       // to avoid filtering log messages by library instead of real logger
@@ -80,7 +80,7 @@ export function adjustLogger(logger: any): Logger {
     };
   }
 
-  if (!logger['setName']) {
+  if (!logger["setName"]) {
     logger.setName = (name: string) => {
       // search for all possible setName/setContext methods, use "noop" if none
       (logger.setName ?? logger.setContext ?? ((i: string) => i))(name);

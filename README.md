@@ -1,6 +1,7 @@
 # NestJS/Slack Integrations
 
-See example application at [./packages/nestjs-slack-example-app/.](./packages/nestjs-slack-example-app/README.md)
+See example application at
+[./packages/nestjs-slack-example-app/.](./packages/nestjs-slack-example-app/README.md)
 directory.
 
 ### @xpr/nestjs-slack
@@ -33,8 +34,8 @@ await app.listen();
 
 ### Initialize Slack/Bolt Assistant application with the `SlackAssistant` transport:
 
-This transport is built on top of `Slack` transport. It provides all `Slack` transports features and provide decorators
-for the assistant application.
+This transport is built on top of `Slack` transport. It provides all `Slack`
+transports features and provide decorators for the assistant application.
 
 ```ts
 const app = await NestFactory.createMicroservice(MyModule, {
@@ -55,27 +56,22 @@ await app.listen();
 Example of a Slack controller with listener for action and a command.
 
 ```ts
-import {
-  SlackAction,
-  SlackCommand,
-  SlackController,
-} from '@xpr/nestjs-slack';
+import { SlackAction, SlackCommand, SlackController } from "@xpr/nestjs-slack";
 
 @SlackController()
 export class MyController {
-
-  @SlackAction('button-action')
+  @SlackAction("button-action")
   async onAction({ ack, respond, payload }: SlackActionMiddlewareArgs) {
     await ack();
     await respond(`Button clicked! with payload ${JSON.stringify(payload)}`);
   }
 
-  @SlackCommand('/ping')
+  @SlackCommand("/ping")
   async onPing({ ack, respond }: SlackCommandMiddlewareArgs) {
     await ack();
     await respond({
-      text: 'pong!',
-      response_type: 'in_channel',
+      text: "pong!",
+      response_type: "in_channel",
     });
   }
 }
@@ -89,29 +85,29 @@ export class MyController {
 
 ```ts
 import {
-  UserMessage,
-  ThreadStarted,
   SlackController,
+  ThreadStarted,
+  UserMessage,
   // `@xpr/nestjs-slack-assistant` re-export everything from `@xpr/nestjs-slack`
-} from '@xpr/nestjs-slack-assistant';
+} from "@xpr/nestjs-slack-assistant";
 
 @SlackController()
 export class MyController {
-
   // any `@xpr/nestjs-slack` decorator can be used here as well
 
   @ThreadStarted()
-  async startThread({ say, setSuggestedPrompts }: AssistantThreadStartedMiddlewareArgs) {
+  async startThread(
+    { say, setSuggestedPrompts }: AssistantThreadStartedMiddlewareArgs,
+  ) {
     await setSuggestedPrompts({ prompts: [/*...*/] });
-    await say('Hi, how can I help you?');
+    await say("Hi, how can I help you?");
   }
 
   @UserMessage()
   async message({ say, message }: AssistantUserMessageMiddlewareArgs) {
-    await say('You said: ' + message.text);
+    await say("You said: " + message.text);
   }
 }
 ```
 
 📃 https://tools.slack.dev/bolt-js/concepts/ai-apps
-

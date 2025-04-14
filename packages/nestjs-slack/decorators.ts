@@ -1,6 +1,11 @@
-import { ActionConstraints, OptionsConstraints, ShortcutConstraints, ViewConstraints } from '@slack/bolt';
-import { Controller } from '@nestjs/common';
-import { eventDecorator, type Pattern } from './utils';
+import {
+  ActionConstraints,
+  OptionsConstraints,
+  ShortcutConstraints,
+  ViewConstraints,
+} from "@slack/bolt";
+import { Controller } from "@nestjs/common";
+import { eventDecorator, type Pattern } from "./utils";
 
 // types to use in decorated methods
 import type {
@@ -12,7 +17,7 @@ import type {
   SlackOptionsMiddlewareArgs,
   SlackShortcutMiddlewareArgs,
   SlackViewMiddlewareArgs,
-} from '@slack/bolt/dist/types';
+} from "@slack/bolt/dist/types";
 
 export { Pattern };
 
@@ -22,13 +27,13 @@ export type EndpointArgs<T extends AnyMiddlewareArgs> = T & AllMiddlewareArgs;
  * @see https://tools.slack.dev/bolt-js/reference/
  */
 export const EventTypes = {
-  Event: 'event',
-  Shortcut: 'shortcut',
-  Command: 'command',
-  Action: 'action',
-  View: 'view',
-  Option: 'option',
-  Message: 'message',
+  Event: "event",
+  Shortcut: "shortcut",
+  Command: "command",
+  Action: "action",
+  View: "view",
+  Option: "option",
+  Message: "message",
 };
 
 /**
@@ -147,7 +152,9 @@ export function SlackOption(optionId: OptionId): MethodDecorator {
   return eventDecorator(EventTypes.Option, optionId);
 }
 
-export type SlackMessageArgs = EndpointArgs<SlackEventMiddlewareArgs<'message'>>;
+export type SlackMessageArgs = EndpointArgs<
+  SlackEventMiddlewareArgs<"message">
+>;
 
 /**
  * Decorator for message events
@@ -156,6 +163,6 @@ export type SlackMessageArgs = EndpointArgs<SlackEventMiddlewareArgs<'message'>>
  * @see reference https://api.slack.com/events/message
  * @param pattern
  */
-export function SlackMessage(pattern: Pattern = '*'): MethodDecorator {
+export function SlackMessage(pattern: Pattern = "*"): MethodDecorator {
   return eventDecorator(EventTypes.Message, pattern);
 }

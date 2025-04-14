@@ -2,12 +2,12 @@ import type {
   AssistantThreadContextChangedMiddleware,
   AssistantThreadStartedMiddleware,
   AssistantUserMessageMiddleware,
-} from '@slack/bolt/dist/Assistant';
-import type { AssistantConfig } from '@slack/bolt/dist/Assistant';
-import type { AssistantThreadContextStore } from '@slack/bolt/dist/AssistantThreadContextStore';
-import Slack, { type SlackOptions } from '@xpr/nestjs-slack/slack';
-import { EventTypes } from './decorators';
-import { Assistant } from '@slack/bolt';
+} from "@slack/bolt/dist/Assistant";
+import type { AssistantConfig } from "@slack/bolt/dist/Assistant";
+import type { AssistantThreadContextStore } from "@slack/bolt/dist/AssistantThreadContextStore";
+import Slack, { type SlackOptions } from "@xpr/nestjs-slack/slack";
+import { EventTypes } from "./decorators";
+import { Assistant } from "@slack/bolt";
 
 export type SlackAssistantOptions = SlackOptions & {
   /**
@@ -46,14 +46,14 @@ export default class SlackAssistant extends Slack {
     }
 
     if (!config.userMessage) {
-      throw new Error('UserMessage handler is required');
+      throw new Error("UserMessage handler is required");
     }
 
     if (!config.threadStarted) {
-      throw new Error('ThreadStarted handler is required');
+      throw new Error("ThreadStarted handler is required");
     }
 
-    this.logger.log('Registering assistant handlers');
+    this.logger.log("Registering assistant handlers");
     this.app().assistant(new Assistant(config as AssistantConfig));
     await this.app().start();
     callback();

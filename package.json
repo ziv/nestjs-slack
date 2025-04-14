@@ -10,7 +10,6 @@
   ],
   "scripts": {
     "build": "npm run build -w packages/nestjs-slack && npm run build -w packages/nestjs-slack-assistant",
-    "lint": "deno fmt && deno lint",
-    "release": "npm run release -w packages/nestjs-slack && npm run release -w packages/nestjs-slack-assistant"
+    "lint": "deno fmt && deno lint"
   }
 }

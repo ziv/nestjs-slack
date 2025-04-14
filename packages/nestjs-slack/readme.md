@@ -1,6 +1,7 @@
 # @xpr/nestjs-slack
 
-A NestJS microservice transport and decorators for [Slack Bolt Apps](https://github.com/slackapi/bolt-js).
+A NestJS microservice transport and decorators for
+[Slack Bolt Apps](https://github.com/slackapi/bolt-js).
 
 ### Usage
 
@@ -31,27 +32,22 @@ await app.listen();
 Example of a Slack controller with listener for action and a command.
 
 ```ts
-import {
-  SlackAction,
-  SlackCommand,
-  SlackController,
-} from '@xpr/nestjs-slack';
+import { SlackAction, SlackCommand, SlackController } from "@xpr/nestjs-slack";
 
 @SlackController()
 export class MyController {
-
-  @SlackAction('button-action')
+  @SlackAction("button-action")
   async onAction({ ack, respond, payload }: SlackActionMiddlewareArgs) {
     await ack();
     await respond(`Button clicked! with payload ${JSON.stringify(payload)}`);
   }
 
-  @SlackCommand('/ping')
+  @SlackCommand("/ping")
   async onPing({ ack, respond }: SlackCommandMiddlewareArgs) {
     await ack();
     await respond({
-      text: 'pong!',
-      response_type: 'in_channel',
+      text: "pong!",
+      response_type: "in_channel",
     });
   }
 }
