@@ -1,10 +1,9 @@
-import { Controller } from "@nestjs/common";
-import { SlackAction, SlackCommand } from "@xpr/nestjs-slack";
+import { SlackAction, SlackCommand, SlackController } from "@xpr/nestjs-slack";
 import { SlackCommandMiddlewareArgs } from "@slack/bolt/dist/types/command";
 import { SlackActionMiddlewareArgs } from "@slack/bolt/dist/types/actions";
 
-@Controller()
-export class SlackController {
+@SlackController()
+export class MySlackController {
   @SlackAction("button-action")
   async onAction({ ack, respond, payload }: SlackActionMiddlewareArgs) {
     await ack();

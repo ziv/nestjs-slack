@@ -117,5 +117,4 @@ export class MyController {
 
 📃 https://tools.slack.dev/bolt-js/concepts/ai-apps
 
-
 ---

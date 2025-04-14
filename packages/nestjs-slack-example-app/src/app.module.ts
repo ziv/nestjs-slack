@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
 import { AssistantController } from "./assistant.controller";
-import { SlackController } from "./slack.controller";
+import { MySlackController } from "./slack.controller";
 
 @Module({
-  controllers: [AssistantController, SlackController],
+  controllers: [AssistantController, MySlackController],
 })
 export class AppModule {}

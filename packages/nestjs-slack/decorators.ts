@@ -1,22 +1,18 @@
-import {
-  ActionConstraints,
-  OptionsConstraints,
-  ShortcutConstraints,
-  ViewConstraints,
-} from "@slack/bolt";
 import { Controller } from "@nestjs/common";
 import { eventDecorator, type Pattern } from "./utils";
-
-// types to use in decorated methods
 import type {
+  ActionConstraints,
   AllMiddlewareArgs,
   AnyMiddlewareArgs,
+  OptionsConstraints,
+  ShortcutConstraints,
   SlackActionMiddlewareArgs,
   SlackCommandMiddlewareArgs,
   SlackEventMiddlewareArgs,
   SlackOptionsMiddlewareArgs,
   SlackShortcutMiddlewareArgs,
   SlackViewMiddlewareArgs,
+  ViewConstraints,
 } from "@slack/bolt/dist/types";
 
 export { Pattern };
@@ -37,7 +33,17 @@ export const EventTypes = {
 };
 
 /**
- * Decorator for Slack controller
+ * Decorator for Slack/Bolt application controller
+ *
+ * @example slack controller:
+ * ```ts
+ * import { SlackController } from '@xpr/nestjs-slack';
+ *
+ * @SlackController()
+ * class MySlackController {
+ *    // add decorated methods
+ * }
+ * ```
  */
 export function SlackController(): ClassDecorator {
   return (target) => Controller()(target);
@@ -45,11 +51,31 @@ export function SlackController(): ClassDecorator {
 
 /**
  * Arguments for the slack event handler
+ *
+ * See {@link SlackEvent}
  */
 export type SlackEventArgs = EndpointArgs<SlackEventMiddlewareArgs>;
 
 /**
  * Decorator for event events
+ *
+ * Usage:
+ * ```ts
+ * import {
+ *  SlackController,
+ *  SlackEvent,
+ *  SlackEventArgs,
+ * } from '@xpr/nestjs-slack';
+ *
+ * @SlackController()
+ * class MySlackController {
+ *
+ *    @SlackEvent('event_name')
+ *    foo(args: SlackEventArgs) {
+ *    }
+ * }
+ * ```
+ *
  * @see guide https://tools.slack.dev/bolt-js/concepts/event-listening
  * @see api https://api.slack.com/apis/events-api
  * @param event
