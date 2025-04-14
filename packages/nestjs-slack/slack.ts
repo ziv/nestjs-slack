@@ -14,12 +14,15 @@ import type {
 import { EventTypes, OptionId, Pattern } from './decorators';
 import { adjustLogger } from './utils';
 
+// local helpers types
+
 type Extra = { type: string; event: Pattern };
 type ShortcutHandler = Middleware<SlackShortcutMiddlewareArgs>;
 type ActionHandler = Middleware<SlackActionMiddlewareArgs>;
 type EventHandler = Middleware<SlackEventMiddlewareArgs>;
 type CommandHandler = Middleware<SlackCommandMiddlewareArgs>;
 type OptionsHandler = Middleware<SlackOptionsMiddlewareArgs>;
+type MsgHandler = Middleware<SlackEventMiddlewareArgs<'message'>>;
 
 export type SlackOptions = {
   /**
@@ -64,6 +67,9 @@ export default class Slack extends Server implements CustomTransportStrategy {
   protected register(handler: MessageHandler) {
     const { type, event } = handler.extras as Extra;
     switch (type) {
+      case EventTypes.Message:
+        this.app().message(event, handler as MsgHandler);
+        break;
       case EventTypes.Shortcut:
         this.app().shortcut(event, handler as ShortcutHandler);
         break;
@@ -71,8 +77,7 @@ export default class Slack extends Server implements CustomTransportStrategy {
         this.app().action(event, handler as ActionHandler);
         break;
       case EventTypes.Event:
-        // todo improve by providing types for events names
-        this.app().event<string>(event as string, handler as EventHandler);
+        this.app().event(event as string, handler as EventHandler);
         break;
       case EventTypes.Command:
         this.app().command(event, handler as CommandHandler);
