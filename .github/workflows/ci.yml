@@ -5,10 +5,6 @@ on:
     #  push:
     #    branches:
     #      - main
-    inputs:
-      version:
-        description: 'Release version'
-        required: true
 permissions:
   #  contents: read # for checkout
   contents: write # to be able to publish a GitHub release
