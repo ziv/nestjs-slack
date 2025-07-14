@@ -26,10 +26,17 @@ type MsgHandler = Middleware<SlackEventMiddlewareArgs<"message">>;
 
 export type SlackOptions = {
   /**
-   * Slack application options with required types
+   * Slack application options with required types.
    * @see https://github.com/slackapi/bolt-js
    */
   slack: AppOptions;
+
+  /**
+   * Whether to inject NestJS logger into the Slack app.
+   * The injected logger override any provided in the `slack` options.
+   * @default false
+   */
+  injectNestjsLogger?: boolean;
 };
 
 export default class Slack extends Server implements CustomTransportStrategy {
@@ -97,8 +104,7 @@ export default class Slack extends Server implements CustomTransportStrategy {
    */
   protected app(): App {
     if (!this.#app) {
-      // make sure to add logger if not provided
-      if (!this.options.slack.logger) {
+      if (this.options.injectNestjsLogger && !this.options.slack.logger) {
         this.options.slack.logger = adjustLogger(this.logger);
       }
       this.#app = new App(this.options.slack);
