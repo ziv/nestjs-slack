@@ -10,6 +10,7 @@ import type {
   SlackCommandMiddlewareArgs,
   SlackEventMiddlewareArgs,
   SlackShortcutMiddlewareArgs,
+  SlackViewMiddlewareArgs,
 } from "@slack/bolt/dist/types";
 import { EventTypes, OptionId, Pattern } from "./decorators";
 import { adjustLogger } from "./utils";
@@ -23,6 +24,7 @@ type EventHandler = Middleware<SlackEventMiddlewareArgs>;
 type CommandHandler = Middleware<SlackCommandMiddlewareArgs>;
 type OptionsHandler = Middleware<SlackOptionsMiddlewareArgs>;
 type MsgHandler = Middleware<SlackEventMiddlewareArgs<"message">>;
+type ViewHandler = Middleware<SlackViewMiddlewareArgs>;
 
 export type SlackOptions = {
   /**
@@ -91,6 +93,9 @@ export default class Slack extends Server implements CustomTransportStrategy {
         break;
       case EventTypes.Option:
         this.app().options(event as OptionId, handler as OptionsHandler);
+        break;
+      case EventTypes.View:
+        this.app().view(event, handler as ViewHandler);
         break;
       default:
         throw new Error(`Unknown event type ${type}`);
