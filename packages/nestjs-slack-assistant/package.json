@@ -29,9 +29,7 @@
   "homepage": "https://github.com/ziv/nestjs-slack#readme",
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
-    "@types/node": "^22.10.6",
-    "semantic-release": "^24.2.3",
-    "semantic-release-monorepo": "^8.0.2"
+    "@types/node": "^22.10.6"
   },
   "peerDependencies": {
     "@xpr/nestjs-slack": "*",
@@ -45,7 +43,7 @@
     "license"
   ],
   "release": {
-    "extends": "semantic-release-monorepo",
+    "tagFormat": "@xpr/nestjs-slack-assitant-v${version}",
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",

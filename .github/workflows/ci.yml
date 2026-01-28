@@ -9,7 +9,7 @@ permissions:
   #  contents: read # for checkout
   contents: write # to be able to publish a GitHub release
   issues: write # to be able to comment on released issues
-  # pull-requests: write # to be able to comment on released pull requests
+  pull-requests: write # to be able to comment on released pull requests
   id-token: write # to enable use of OIDC for npm provenance (npm and jsr)
 jobs:
   prepare:
@@ -37,7 +37,7 @@ jobs:
         run: npm run build
 
       - name: 🦋release nestjs-slack
-        run: cd packages/nestjs-slack && npx semantic-release
+        run: npx semantic-release -w nestjs-slack
 
       - name: 🦋release nestjs-slack-assistant
-        run: cd packages/nestjs-slack-assistant && npx semantic-release
+        run: npx semantic-release -w nestjs-slack-assistant

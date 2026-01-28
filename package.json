@@ -16,5 +16,8 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.1.5",
     "typedoc": "^0.28.2"
+  },
+  "dependencies": {
+    "semantic-release": "^25.0.2"
   }
 }
