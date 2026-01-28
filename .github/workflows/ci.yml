@@ -37,7 +37,7 @@ jobs:
         run: npm run build
 
       - name: 🦋release nestjs-slack
-        run: npx semantic-release -w nestjs-slack
+        run: npm run release -w  nestjs-slack
 
       - name: 🦋release nestjs-slack-assistant
-        run: npx semantic-release -w nestjs-slack-assistant
+        run: npm run release -w nestjs-slack-assistant
