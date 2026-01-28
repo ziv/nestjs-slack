@@ -9,22 +9,23 @@ permissions:
   #  contents: read # for checkout
   contents: write # to be able to publish a GitHub release
   issues: write # to be able to comment on released issues
-  pull-requests: write # to be able to comment on released pull requests
+  # pull-requests: write # to be able to comment on released pull requests
   id-token: write # to enable use of OIDC for npm provenance (npm and jsr)
 jobs:
   prepare:
     name: Prepare release
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - name: ⛵️ checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v6
 
       - name: ☂️ setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20
+          cache: npm
 
       - name: 🔑 dependencies
         run: npm ci
@@ -36,13 +37,7 @@ jobs:
         run: npm run build
 
       - name: 🦋release nestjs-slack
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISH }}
         run: cd packages/nestjs-slack && npx semantic-release
 
       - name: 🦋release nestjs-slack-assistant
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISH }}
         run: cd packages/nestjs-slack-assistant && npx semantic-release
