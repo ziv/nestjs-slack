@@ -44,7 +44,7 @@
     "license"
   ],
   "release": {
-    "tagFormat": "@xpr/nestjs-slack-assitant-v${version}",
+    "tagFormat": "@xpr/nestjs-slack-assistant-v${version}",
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
